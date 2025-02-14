@@ -176,7 +176,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>Netier Partner Management</title>
       </Head>
       <Box sx={{ flexGrow: 1, py: 4 }}>
         <Container maxWidth={false}>

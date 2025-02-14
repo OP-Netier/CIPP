@@ -454,7 +454,7 @@ export const nativeMenuItems = [
     ],
   },
   {
-    title: "CIPP",
+    title: "Netier Partner Management",
     type: "header",
     icon: (
       <SvgIcon>
