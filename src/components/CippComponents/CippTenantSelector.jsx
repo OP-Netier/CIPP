@@ -124,7 +124,21 @@ export const CippTenantSelector = (props) => {
           disableClearable={true}
           creatable={false}
           multiple={multiple}
-          sx={{ width: width ? width : "400px" }}
+          sx={{
+            width: width ? width : "400px",
+            "& .MuiAutocomplete-inputRoot": {
+              color: "rgb(255, 255, 255)",
+              fontWeight: "bold",
+            },
+            "& .MuiInputLabel-root": {
+              color: "rgb(255, 255, 255)",
+              fontWeight: "bold",
+            },
+            "& .MuiAutocomplete-option": {
+              color: "rgb(255, 255, 255)",
+              fontWeight: "bold",
+            },
+          }}
           placeholder={
             tenantList.isFetching
               ? "Loading Tenants..."

@@ -74,6 +74,7 @@ export const TopNav = (props) => {
               sx={{
                 borderColor: "neutral.500",
                 height: 36,
+                display: "none",
               }}
             />
           }
@@ -83,8 +84,8 @@ export const TopNav = (props) => {
             href={paths.index}
             sx={{
               display: "inline-flex",
-              height: 24,
-              width: 24,
+              height: 45,
+              width: 260,
             }}
           >
             <Logo />
@@ -115,7 +116,8 @@ export const TopNav = (props) => {
           <NotificationsPopover />
           <AccountPopover
             onThemeSwitch={handleThemeSwitch}
-            paletteMode={settings.currentTheme?.value === "light" ? "dark" : "light"}
+           // paletteMode={settings.currentTheme?.value === "light" ? "dark" : "light"}
+            paletteMode={settings.currentTheme?.value === "dark" ? "light" : "dark"}
           />
         </Stack>
       </Stack>
