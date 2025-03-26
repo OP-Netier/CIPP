@@ -48,6 +48,7 @@ export const nativeMenuItems = [
           {
             title: "Offboarding Wizard",
             path: "/identity/administration/offboarding-wizard",
+            roles: ["admin", "superadmin"],
           },
         ],
       },
@@ -108,6 +109,7 @@ export const nativeMenuItems = [
       {
         title: "GDAP Management",
         path: "/tenant/gdap-management/",
+        roles: ["admin", "superadmin"],
       },
       {
         title: "Configuration Backup",
@@ -159,6 +161,7 @@ export const nativeMenuItems = [
           {
             title: "Sherweb Licence Report",
             path: "/tenant/reports/list-csp-licenses",
+            roles: ["admin", "superadmin"],
           },
           {
             title: "Consented Applications",
@@ -408,6 +411,7 @@ export const nativeMenuItems = [
           {
             title: "Application Approval",
             path: "/tenant/tools/appapproval",
+            roles: ["admin", "superadmin"],
           },
           { title: "Tenant Lookup", path: "/tenant/tools/tenantlookup" },
 
@@ -439,23 +443,24 @@ export const nativeMenuItems = [
       {
         title: "Template Library",
         path: "/tools/templatelib",
-        roles: ["editor", "admin", "superadmin"],
+        roles: ["admin", "superadmin"],
       },
       {
         title: "Community Repositories",
         path: "/tools/community-repos",
-        roles: ["editor", "admin", "superadmin"],
+        roles: ["admin", "superadmin"],
       },
       {
         title: "Scheduler",
         path: "/cipp/scheduler",
-        roles: ["editor", "admin", "superadmin"],
+        roles: ["admin", "superadmin"],
       },
     ],
   },
   {
-    title: "Netier Partner Management",
+    title: "Settings",
     type: "header",
+    roles: ["admin", "superadmin"],
     icon: (
       <SvgIcon>
         <WrenchIcon />
@@ -463,7 +468,7 @@ export const nativeMenuItems = [
     ),
     items: [
       { title: "Application Settings", path: "/cipp/settings", roles: ["admin", "superadmin"] },
-      { title: "Logbook", path: "/cipp/logs", roles: ["editor", "admin", "superadmin"] },
+      { title: "Logbook", path: "/cipp/logs", roles: ["admin", "superadmin"] },
       { title: "SAM Setup Wizard", path: "/onboarding", roles: ["admin", "superadmin"] },
       { title: "Integrations", path: "/cipp/integrations", roles: ["admin", "superadmin"] },
       {
