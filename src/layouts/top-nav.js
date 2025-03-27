@@ -35,7 +35,7 @@ export const TopNav = (props) => {
   const settings = useSettings();
   const mdDown = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const handleThemeSwitch = useCallback(() => {
-    const themeName = settings.currentTheme?.value === "light" ? "dark" : "light";
+    const themeName = settings.currentTheme?.value === "dark" ? "light" : "dark";
     settings.handleUpdate({
       currentTheme: { value: themeName, label: themeName },
     });
@@ -190,8 +190,8 @@ export const TopNav = (props) => {
           <NotificationsPopover />
           <AccountPopover
             onThemeSwitch={handleThemeSwitch}
-           // paletteMode={settings.currentTheme?.value === "light" ? "dark" : "light"}
             paletteMode={settings.currentTheme?.value === "dark" ? "light" : "dark"}
+          //  paletteMode={settings.currentTheme?.value === "dark" ? "light" : "dark"}
           />
         </Stack>
       </Stack>

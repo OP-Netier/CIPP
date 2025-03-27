@@ -69,7 +69,7 @@ const storeSettings = (value) => {
 
 const initialSettings = {
   direction: "ltr",
-  paletteMode: "light",
+  paletteMode: "dark",
   pinNav: true,
   currentTenant: null,
   showDevtools: false,

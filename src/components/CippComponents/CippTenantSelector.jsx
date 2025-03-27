@@ -31,6 +31,9 @@ export const CippTenantSelector = (props) => {
     keepPreviousData: true,
   });
 
+  const themeName = settings.currentTheme?.value;
+  const isDarkMode = themeName === "dark";
+
   const [currentTenant, setSelectedTenant] = useState(null);
   const [offcanvasVisible, setOffcanvasVisible] = useState(false);
 
@@ -128,21 +131,21 @@ export const CippTenantSelector = (props) => {
           disableClearable={true}
           creatable={false}
           multiple={multiple}
-          sx={{
-            width: width ? width : "400px",
-            "& .MuiAutocomplete-inputRoot": {
-              color: "rgb(255, 255, 255)",
-              fontWeight: "bold",
-            },
-            "& .MuiInputLabel-root": {
-              color: "rgb(255, 255, 255)",
-              fontWeight: "bold",
-            },
-            "& .MuiAutocomplete-option": {
-              color: "rgb(255, 255, 255)",
-              fontWeight: "bold",
-            },
-          }}
+      sx={{
+        width: width ? width : "400px",
+        "& .MuiAutocomplete-inputRoot": {
+          color: isDarkMode ? "rgb(255, 255, 255)" : "rgb(0, 0, 0)", // White for dark mode, black for light mode
+          fontWeight: "bold",
+        },
+        "& .MuiInputLabel-root": {
+          color: isDarkMode ? "rgb(255, 255, 255)" : "rgb(0, 0, 0)", // White for dark mode, black for light mode
+          fontWeight: "bold",
+        },
+        "& .MuiAutocomplete-option": {
+          color: isDarkMode ? "rgb(255, 255, 255)" : "rgb(0, 0, 0)", // White for dark mode, black for light mode
+          fontWeight: "bold",
+        },
+      }}
           placeholder={
             tenantList.isFetching
               ? "Loading Tenants..."
