@@ -32,9 +32,9 @@ export const blue = withAlphas({
 });
 
 export const orange = withAlphas({
-  light: "#F77F00",
-  main: "#F77F00",
-  dark: "#F77F00",
+  light: "#ED1C24",
+  main: "#ED1C24",
+  dark: "#ED1C24",
   contrastText: "#FFFFFF",
 });
 
