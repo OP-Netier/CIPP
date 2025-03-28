@@ -14,13 +14,13 @@ import { PrivateRoute } from "../components/PrivateRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useMediaPredicate } from "react-media-hook";
 import Error500 from "./500";
-import { ErrorBoundary } from "@microsoft/applicationinsights-react-js"; // Use reactPlugin's ErrorBoundary
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import React from "react";
-import { reactPlugin, appInsights } from "../pages/ApplicationInsightsService";
+import ErrorBoundary from "../components/ErrorBoundary";
+import { appInsights } from "../libs/ApplicationInsightsService";
 
 TimeAgo.addLocale(en);
 
@@ -52,11 +52,11 @@ const App = (props) => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, []);
-
+ 
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>Netier Partner Management</title>
+        <title>CIPP</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ReduxProvider store={store}>
@@ -86,11 +86,11 @@ const App = (props) => {
                             onError={(error, componentStack) => {
                               appInsights.trackException({ error, properties: { componentStack } });
                             }}
-                            reactPlugin={reactPlugin} // Pass the reactPlugin here
-                            FallbackComponent={Error500}
+                            fallback={<Error500 />} // Use your custom fallback component
                           >
                             <PrivateRoute>{getLayout(<Component {...pageProps} />)}</PrivateRoute>
                           </ErrorBoundary>;
+                          <Toaster position="top-center" />
                         </RTL>
                       </ThemeProvider>
                       {settings.isInitialized && settings?.showDevtools === true ? (
