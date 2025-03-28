@@ -20,7 +20,7 @@ import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 import React from "react";
 import ErrorBoundary from "../components/ErrorBoundary";
-import { appInsights } from "../libs/ApplicationInsightsService";
+import { appInsights, trackPageView } from "../libs/ApplicationInsightsService";
 
 TimeAgo.addLocale(en);
 
@@ -37,10 +37,9 @@ const App = (props) => {
   const getLayout = Component.getLayout ?? ((page) => page);
   const preferredTheme = useMediaPredicate("(prefers-color-scheme: dark)") ? "dark" : "light";
 
-  // Track page views when the component changes
   React.useEffect(() => {
     const handleRouteChange = (url) => {
-      appInsights.trackPageView({ name: url });
+      trackPageView("Page View", url, { customProperty: "Custom Value" });
     };
 
     // Listen to route changes
@@ -52,11 +51,14 @@ const App = (props) => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, []);
- 
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>CIPP</title>
+        <title>Netier Partner Portal</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ReduxProvider store={store}>

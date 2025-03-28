@@ -18,10 +18,21 @@ appInsights.loadAppInsights();
 
 appInsights.addTelemetryInitializer((env) => {
   env.tags = env.tags || [];
-  env.tags['ai.cloud.role'] = 'CIPP-UI';
-  env.tags['ai.cloud.roleInstance'] = 'CIPP-UI-Instance';
+  env.tags['ai.cloud.role'] = 'CIPP-UI'; // Static Web App role
+  env.tags['ai.cloud.roleInstance'] = 'cipp-swa-7l5hx'; // Static Web App instance name
+  env.tags['ai.cloud.backendApi'] = 'cipp7l5hx'; // Backend API name
+  env.tags['ai.cloud.backendApiProc'] = 'cipp7l5hx-proc'; // Backend API processing name
 });
+const trackPageView = (name, url, customProperties = {}) => {
+  appInsights.trackPageView({
+    name: name || document.title, // Page name
+    uri: url || window.location.href, // Page URL
+    properties: {
+      ...customProperties, // Add custom properties
+      userAgent: navigator.userAgent, // Collect user agent information
+      referrer: document.referrer, // Collect referrer information
+    },
+  });
+};
 
-appInsights.trackPageView();
-
-export { reactPlugin, appInsights };
+export { reactPlugin, appInsights, trackPageView };
