@@ -53,6 +53,20 @@ function ensureStyleTag() {
 
     /* If there are known classnames you can target them directly (add here for precision) */
     /* .MuiButton-containedPrimary { background: var(--cipp-brand-override) !important; } */
+
+    /* Override old orange brand variables (#F77F00) when they appear inline */
+    [style*="--variant-textColor: #F77F00"],
+    [style*="--variant-outlinedColor: #F77F00"],
+    [style*="--variant-containedBg: #F77F00"],
+    [style*="rgba(247, 127, 0"],
+    [style*="#F77F00"] {
+      --variant-textColor: #ED1C24 !important;
+      --variant-outlinedColor: #ED1C24 !important;
+      --variant-containedBg: #ED1C24 !important;
+      --variant-outlinedBorder: rgba(237, 28, 36, 0.5) !important;
+      color: #ED1C24 !important;
+      border-color: rgba(237, 28, 36, 0.5) !important;
+    }
   `;
   document.head.appendChild(style);
 }
@@ -67,6 +81,11 @@ function patchLogo() {
     if (img.src.startsWith("data:image")) {
       img.src = "https://partner.netier.cloud/logo.svg";
       img.dataset.overridden = "1";
+      img.style.paddingRight = "10px";
+      const parentLink = img.closest('a');
+      if (parentLink) {
+        parentLink.style.width = 'auto';
+      }
     }
   };
 
