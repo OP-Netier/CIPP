@@ -15,7 +15,7 @@ import { CippImageCard } from "../components/CippCards/CippImageCard";
 import Page from "../pages/onboardingv2";
 import { useDialog } from "../hooks/use-dialog";
 import { nativeMenuItems } from "/src/layouts/config";
-import { applyOverrides } from "/src/utils/overrides";
+import { applyOverrides, reapplyOverridesOnRouteChange } from "/src/utils/overrides";
 
 const SIDE_NAV_WIDTH = 270;
 const SIDE_NAV_PINNED_WIDTH = 50;
@@ -73,6 +73,8 @@ export const Layout = (props) => {
   const mdDown = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const settings = useSettings();
   const mobileNav = useMobileNav();
+  // Pathname for detecting route changes (App Router friendly)
+  const currentPathname = usePathname();
   const [userSettingsComplete, setUserSettingsComplete] = useState(false);
   const [fetchingVisible, setFetchingVisible] = useState([]);
   const [menuItems, setMenuItems] = useState(nativeMenuItems);
@@ -277,6 +279,13 @@ export const Layout = (props) => {
   useEffect(() => {
     applyOverrides();
   }, []);
+
+  // Re-apply lightweight overrides on every route change
+  useEffect(() => {
+    if (currentPathname) {
+      reapplyOverridesOnRouteChange();
+    }
+  }, [currentPathname]);
 
   return (
     <>
