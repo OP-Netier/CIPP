@@ -15,7 +15,7 @@ import { CippImageCard } from "../components/CippCards/CippImageCard";
 import Page from "../pages/onboardingv2";
 import { useDialog } from "../hooks/use-dialog";
 import { nativeMenuItems } from "/src/layouts/config";
-import { applyOverrides } from "@/utils/overrides";
+import { applyOverrides } from "/src/utils/overrides";
 
 const SIDE_NAV_WIDTH = 270;
 const SIDE_NAV_PINNED_WIDTH = 50;
