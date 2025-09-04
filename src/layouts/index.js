@@ -94,10 +94,6 @@ export const Layout = (props) => {
   });
 
   useEffect(() => {
-    applyOverrides();
-  }, []);
-
-  useEffect(() => {
     if (currentRole.isSuccess && !currentRole.isFetching) {
       const userRoles = currentRole.data?.clientPrincipal?.userRoles;
       const userPermissions = currentRole.data?.permissions;
@@ -277,6 +273,10 @@ export const Layout = (props) => {
       }
     }
   }, [alertsAPI.isSuccess]);
+
+  useEffect(() => {
+    applyOverrides();
+  }, []);
 
   return (
     <>
