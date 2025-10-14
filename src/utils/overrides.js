@@ -72,7 +72,6 @@ function ensureStyleTag() {
 }
 
 function patchLogo() {
-  // If already replaced, skip
   const existing = document.querySelector('img[alt="Logo"][data-overridden="1"]');
   if (existing) return;
 
@@ -89,11 +88,9 @@ function patchLogo() {
     }
   };
 
-  // Immediate attempt
   const immediate = document.querySelector('img[alt="Logo"][src^="data:image"]');
   if (immediate) swap(immediate);
 
-  // Observe future inserts (one-time if not found yet)
   if (!mutationObserver) {
     mutationObserver = new MutationObserver((muts) => {
       for (const mut of muts) {
@@ -110,7 +107,6 @@ function patchLogo() {
 }
 
 function hideSponsoredText() {
-  // Use a marker to avoid repeated scans
   if (document.body.dataset.sponsorTextProcessed === "1") return;
 
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -134,9 +130,7 @@ function hideSponsorImages() {
   });
 }
 
-// Optional: call this on route changes if your app re-renders content
 export function reapplyOverridesOnRouteChange() {
-  // Force re-check dynamic content without redoing global setups
   hideSponsoredText();
   hideSponsorImages();
   patchLogo();
