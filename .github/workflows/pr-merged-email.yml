@@ -1,0 +1,44 @@
+name: Send changelog email on PR merge
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  send-changelog-email:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Get changelog from PR body and commits
+        id: changelog
+        run: |
+          echo "### Pull Request #${{ github.event.pull_request.number }}" > changelog.txt
+          echo "Title: ${{ github.event.pull_request.title }}" >> changelog.txt
+          echo "" >> changelog.txt
+          echo "Author: ${{ github.event.pull_request.user.login }}" >> changelog.txt
+          echo "Merged by: ${{ github.actor }}" >> changelog.txt
+          echo "" >> changelog.txt
+          echo "Changes:" >> changelog.txt
+          git fetch origin ${{ github.event.pull_request.base.ref }} --depth=1
+          git log origin/${{ github.event.pull_request.base.ref }}..HEAD --oneline >> changelog.txt
+          echo "" >> changelog.txt
+          echo "PR Description:" >> changelog.txt
+          echo "${{ github.event.pull_request.body }}" >> changelog.txt
+
+      - name: Send email with changelog
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.EMAIL_SMTP }}
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "PR #${{ github.event.pull_request.number }} merged into ${{ github.event.pull_request.base.ref }}"
+          to: "smtpalerts@netier.com.au"
+          from: "github@netier.com.au"
+          content_type: text/plain
+          body_file: changelog.txt
